@@ -5,7 +5,7 @@ classes you need and how many images per class you need.**
 This is achieved by using image urls provided by ImageNet API.
 
 
-More details [in this blog post.](mf1024.github.io)
+More details [in this blog post.](https://mf1024.github.io)
 
 ## Usage
 
