@@ -9,8 +9,10 @@ DATA_ROOT = '/Users/martinsf/ai/deep_learning_projects/data'
 URL_WORDNET = 'http://image-net.org/archive/words.txt'
 IMAGENET_API_WNID_TO_URLS = lambda wnid: f'http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={wnid}'
 
+current_folder = os.path.dirname(os.path.realpath(__file__))
+
 wordnet_filename = URL_WORDNET.split('/')[-1]
-wordnet_file_path = os.path.join(DATA_ROOT, wordnet_filename)
+wordnet_file_path = os.path.join(current_folder, wordnet_filename)
 print(wordnet_file_path)
 if not os.path.exists(wordnet_file_path):
 
@@ -65,7 +67,7 @@ with codecs.open(url_list_filepath, 'r', encoding='utf-8', errors='ignore') as f
                 wnid_to_class_dict[row[0]] = row[1]
 
     class_info_json_filename = 'imagenet_class_info.json'
-    class_info_json_filepath = os.path.join(DATA_ROOT, class_info_json_filename)
+    class_info_json_filepath = os.path.join(current_folder, class_info_json_filename)
 
     img_counts = []
     total_url_counts = []

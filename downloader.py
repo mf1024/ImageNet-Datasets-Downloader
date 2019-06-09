@@ -1,5 +1,4 @@
 import os
-import csv
 import numpy as np
 import requests
 import argparse
@@ -25,10 +24,13 @@ if not os.path.isdir(args.data_root):
     print(f'folder {args.data_root} does not exist! please provide existing folder in -data_root arg!')
     exit()
 
+
 IMAGENET_API_WNID_TO_URLS = lambda wnid: f'http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={wnid}'
 
+current_folder = os.path.dirname(os.path.realpath(__file__))
+
 class_info_json_filename = 'imagenet_class_info.json'
-class_info_json_filepath = os.path.join(args.data_root, class_info_json_filename)
+class_info_json_filepath = os.path.join(current_folder, class_info_json_filename)
 
 class_info_dict = dict()
 
