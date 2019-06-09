@@ -1,1 +1,1 @@
-# ImageNet-datasets-downloader
+# ImageNet datasets downloader
