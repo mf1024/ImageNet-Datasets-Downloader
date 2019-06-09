@@ -19,7 +19,7 @@ The following command will randomly select 100 of ImageNet classes with at least
 ```
 
 
-The following command will download 500 images from each of select class:
+The following command will download 500 images from each of selected class:
 ```
 ./downloader.py 
     -data_root /Users/mf1024/ai/imagenet \
