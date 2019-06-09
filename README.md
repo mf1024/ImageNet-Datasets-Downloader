@@ -1,4 +1,4 @@
-# ImageNet-datasets-downloader
+# ImageNet datasets downloader
 
 This is ImageNet dataset downloader. **You can create new datasets from subsets of ImageNet by specifying how many 
 classes you need and how many images per class you need.** 
