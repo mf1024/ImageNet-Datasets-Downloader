@@ -9,6 +9,7 @@ More details [in this blog post.](https://mf1024.github.io)
 
 ## Usage
 
+This software is written in Python 3.
 
 The following command will randomly select 100 of ImageNet classes with at least 200 images in it and start downloading:
 ```
