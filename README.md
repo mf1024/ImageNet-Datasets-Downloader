@@ -7,9 +7,10 @@ This is achieved by using image urls provided by ImageNet API.
 
 More details [in this blog post.](https://mf1024.github.io)
 
+This software is written in Python 3
+
 ## Usage
 
-This software is written in Python 3.
 
 The following command will randomly select 100 of ImageNet classes with at least 200 images in it and start downloading:
 ```
