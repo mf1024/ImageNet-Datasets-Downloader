@@ -4,7 +4,7 @@ import requests
 import argparse
 import json
 
-from requests.exceptions import ConnectionError, ReadTimeout, TooManyRedirects
+from requests.exceptions import ConnectionError, ReadTimeout, TooManyRedirects, MissingSchema
 
 parser = argparse.ArgumentParser(description='ImageNet image scraper')
 parser.add_argument('-scrape_only_flickr', default=True, type=lambda x: (str(x).lower() == 'true'))
@@ -108,6 +108,9 @@ for class_wnid in classes_to_scrape:
 
     for img_url in resp.content.splitlines():
 
+        if len(img_url) < 5:
+            continue
+
         cls=''
         if 'flickr' in img_url.decode('utf-8'):
             cls = 'is_flickr'
@@ -131,6 +134,8 @@ for class_wnid in classes_to_scrape:
             continue
         except TooManyRedirects:
             print("Too many redirects")
+            continue
+        except MissingSchema:
             continue
 
         if not 'content-type' in img_resp.headers:
