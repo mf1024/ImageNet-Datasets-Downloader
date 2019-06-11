@@ -21,7 +21,7 @@ parser.add_argument('-debug', default=False,type=lambda x: (str(x).lower() == 't
 args, args_other = parser.parse_known_args()
 
 if args.debug:
-    logging.basicConfig(filename='resnet_scarper.log', level=logging.DEBUG)
+    logging.basicConfig(filename='imagenet_scarper.log', level=logging.DEBUG)
 
 if len(args.data_root) == 0:
     logging.error("-data_root is required to run downloader!")
@@ -199,7 +199,7 @@ for class_wnid in classes_to_scrape:
             logging.debug("Read Timeout")
             continue
         except TooManyRedirects:
-            print("Too many redirects")
+            logging.debug("Too many redirects")
             continue
         except MissingSchema:
             continue
