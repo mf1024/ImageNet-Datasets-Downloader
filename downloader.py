@@ -145,6 +145,7 @@ for class_wnid in classes_to_scrape:
     print(f'Scraping images for class \"{class_name}\"')
     url_urls = IMAGENET_API_WNID_TO_URLS(class_wnid)
 
+    time.sleep(0.05)
     resp = requests.get(url_urls)
 
     class_folder = os.path.join(imagenet_images_folder, class_name)
