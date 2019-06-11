@@ -216,10 +216,15 @@ for class_wnid in classes_to_scrape:
         if (len(img_resp.content) < 1000):
             continue
 
+
         logging.debug(img_resp.headers['content-type'])
         logging.debug(f'image size {len(img_resp.content)}')
 
         img_name = img_url.decode('utf-8').split('/')[-1]
+
+        if (len(img_name) <= 1):
+            continue
+
         img_file_path = os.path.join(class_folder, img_name)
 
         logging.debug(f'Saving image in {img_file_path}')
