@@ -29,3 +29,4 @@ python ./downloader.py
     -class_list n09858165 n01539573 n03405111 \
     -images_per_class 500 
 ```
+You can find class list in [this csv](https://github.com/mf1024/ImageNet-datasets-downloader/blob/master/classes_in_imagenet.csv) where I list every class that appear in the ImageNet with number of total urls and total flickr urls it that class.
