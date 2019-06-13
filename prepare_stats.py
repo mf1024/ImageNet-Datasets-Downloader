@@ -56,15 +56,11 @@ with codecs.open(url_list_filepath, 'r', encoding='utf-8', errors='ignore') as f
 
     wnid_to_class_dict = dict()
     with open(wordnet_file_path, "r") as word_list_file:
-
             csv_reader_word_list = csv.reader(word_list_file, delimiter='\t')
-
             for row in csv_reader_word_list:
-
                 wnid = row[0]
                 keywords = row[1]
-
-                wnid_to_class_dict[row[0]] = row[1]
+                wnid_to_class_dict[wnid] = keywords
 
     class_info_json_filename = 'imagenet_class_info.json'
     class_info_json_filepath = os.path.join(current_folder, class_info_json_filename)
@@ -75,15 +71,21 @@ with codecs.open(url_list_filepath, 'r', encoding='utf-8', errors='ignore') as f
 
     class_info_dict = dict()
 
-    for key, val in img_url_dict.items():
-        class_info_dict[key] = dict(
-            img_url_count = val['urls'],
-            flickr_img_url_count = val['flickr_urls'],
-            class_name = wnid_to_class_dict[key].split(',')[0]
-        )
-        print(f'{wnid_to_class_dict[key]} {len(val)}')
-        total_url_counts.append(val['urls'])
-        flickr_url_counts.append(val['flickr_urls'])
+    with open("classes_in_imagenet.csv", "w") as csv_f:
+        csv_writer  = csv.writer(csv_f, delimiter=",")
+        csv_writer.writerow(["synid", "class_name", "urls", "flickr_urls"])
+
+        for key, val in img_url_dict.items():
+            class_info_dict[key] = dict(
+                img_url_count = val['urls'],
+                flickr_img_url_count = val['flickr_urls'],
+                class_name = wnid_to_class_dict[key].split(',')[0]
+            )
+            print(f'{wnid_to_class_dict[key]} {len(val)}')
+            total_url_counts.append(val['urls'])
+            csv_writer.writerow([key, wnid_to_class_dict[key].split(',')[0], val['urls'], val["flickr_urls"]])
+
+            flickr_url_counts.append(val['flickr_urls'])
 
 
     with open(class_info_json_filepath,"w") as class_info_json_f:
