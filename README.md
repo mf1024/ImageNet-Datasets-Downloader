@@ -15,7 +15,7 @@ This software is written in Python 3
 The following command will randomly select 100 of ImageNet classes with at least 200 images in it and start downloading:
 ```
 python ./downloader.py \
-    -data_root /Users/mf1024/ai/imagenet \
+    -data_root /data_root_folder/imagenet \
     -number_of_classes 100 \
     -images_per_class 200
 ```
@@ -24,7 +24,7 @@ python ./downloader.py \
 The following command will download 500 images from each of selected class:
 ```
 python ./downloader.py 
-    -data_root /Users/mf1024/ai/imagenet \
+    -data_root /data_root_folder/imagenet \
     -use_class_list True \
     -class_list n09858165 n01539573 n03405111 \
     -images_per_class 500 
