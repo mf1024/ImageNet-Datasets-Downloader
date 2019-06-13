@@ -5,7 +5,7 @@ classes you need and how many images per class you need.**
 This is achieved by using image urls provided by ImageNet API.
 
 
-More details [in this blog post.](https://mf1024.github.io)
+More details [in this blog post.](https://mf1024.github.io/2019/06/09/how-to-scrape-the-imagenet/)
 
 This software is written in Python 3
 
