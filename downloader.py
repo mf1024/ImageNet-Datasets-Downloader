@@ -162,7 +162,7 @@ for class_wnid in classes_to_scrape:
 
         url_tries += 1
 
-        if url_tries % 500 == 0:
+        if url_tries % 250 == 0:
             print(f'\nScraping stats {scraping_stats}')
             print_stats('is_flickr', print)
             print_stats('not_flickr', print)
@@ -222,6 +222,7 @@ for class_wnid in classes_to_scrape:
         logging.debug(f'image size {len(img_resp.content)}')
 
         img_name = img_url.decode('utf-8').split('/')[-1]
+        img_name = img_name.split("?")[0]
 
         if (len(img_name) <= 1):
             continue
