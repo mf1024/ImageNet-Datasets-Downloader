@@ -327,5 +327,7 @@ for class_wnid in classes_to_scrape:
 
     #for url in  urls:
     #    get_image(url)
+
+    print(f"Multiprocessing workers: {args.multiprocessing_workers}")
     with Pool(processes=args.multiprocessing_workers) as p:
         p.map(get_image,urls)
