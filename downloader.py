@@ -20,7 +20,7 @@ parser.add_argument('-use_class_list', default=False,type=lambda x: (str(x).lowe
 parser.add_argument('-class_list', default=[], nargs='*')
 parser.add_argument('-debug', default=False,type=lambda x: (str(x).lower() == 'true'))
 
-parser.add_argument('-multiprocessing_workers', default = 16, type=int)
+parser.add_argument('-multiprocessing_workers', default = 8, type=int)
 
 args, args_other = parser.parse_known_args()
 
