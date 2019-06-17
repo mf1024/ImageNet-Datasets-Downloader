@@ -68,7 +68,7 @@ elif args.use_class_list == False:
             if int(val['img_url_count'])*0.8 > args.images_per_class:
                 potential_class_pool.append(key)
 
-    picked_classes_idxes = np.random.choice(len(potential_class_pool), args.number_of_classes)
+    picked_classes_idxes = np.random.choice(len(potential_class_pool), args.number_of_classes, replace = False)
 
     for idx in picked_classes_idxes:
         classes_to_scrape.append(potential_class_pool[idx])
