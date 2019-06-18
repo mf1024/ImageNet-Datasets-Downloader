@@ -62,11 +62,16 @@ elif args.use_class_list == False:
     for key, val in class_info_dict.items():
 
         if args.scrape_only_flickr:
-            if int(val['flickr_img_url_count'])*0.8 > args.images_per_class:
+            if int(val['flickr_img_url_count']) * 0.9 > args.images_per_class:
                 potential_class_pool.append(key)
         else:
-            if int(val['img_url_count'])*0.8 > args.images_per_class:
+            if int(val['img_url_count']) * 0.8 > args.images_per_class:
                 potential_class_pool.append(key)
+
+    if (len(potential_class_pool) < args.number_of_classes):
+        logging.error(f"With {args.images_per_class} images per class there are {len(potential_class_pool)} to choose from.")
+        logging.error(f"Decrease number of classes or decrease images per class.")
+        exit()
 
     picked_classes_idxes = np.random.choice(len(potential_class_pool), args.number_of_classes, replace = False)
 
