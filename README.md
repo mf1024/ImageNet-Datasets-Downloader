@@ -12,7 +12,7 @@ This software is written in Python 3
 ## Usage
 
 
-The following command will randomly select 100 of ImageNet classes with at least 200 images in it and start downloading:
+The following command will randomly select 100 of ImageNet classes with at least 200 images in them and start downloading:
 ```
 python ./downloader.py \
     -data_root /data_root_folder/imagenet \
