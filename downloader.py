@@ -17,6 +17,7 @@ parser.add_argument('-scrape_only_flickr', default=True, type=lambda x: (str(x).
 parser.add_argument('-number_of_classes', default = 10, type=int)
 parser.add_argument('-images_per_class', default = 10, type=int)
 parser.add_argument('-data_root', default='' , type=str)
+parser.add_argument('-data_folder', default='imagenet_images' , type=str)
 parser.add_argument('-use_class_list', default=False,type=lambda x: (str(x).lower() == 'true'))
 parser.add_argument('-class_list', default=[], nargs='*')
 parser.add_argument('-debug', default=False,type=lambda x: (str(x).lower() == 'true'))
@@ -83,7 +84,7 @@ elif args.use_class_list == False:
 print("Picked the following clases:")
 print([ class_info_dict[class_wnid]['class_name'] for class_wnid in classes_to_scrape ])
 
-imagenet_images_folder = os.path.join(args.data_root, 'imagenet_images')
+imagenet_images_folder = os.path.join(args.data_root, args.data_folder)
 if not os.path.isdir(imagenet_images_folder):
     os.mkdir(imagenet_images_folder)
 
