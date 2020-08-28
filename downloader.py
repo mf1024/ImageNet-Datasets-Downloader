@@ -332,9 +332,10 @@ for class_wnid in classes_to_scrape:
 
     urls = [url.decode('utf-8') for url in resp.content.splitlines()]
 
-    #for url in  urls:
-    #    get_image(url)
-
-    print(f"Multiprocessing workers: {args.multiprocessing_workers}")
-    with Pool(processes=args.multiprocessing_workers) as p:
-        p.map(get_image,urls)
+    if args.multiprocessing_workers==0:
+        for url in  urls:
+            get_image(url)
+    else:
+        print(f"Multiprocessing workers: {args.multiprocessing_workers}")
+        with Pool(processes=args.multiprocessing_workers) as p:
+            p.map(get_image,urls)
