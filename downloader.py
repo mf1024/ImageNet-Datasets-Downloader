@@ -34,7 +34,7 @@ if len(args.data_root) == 0:
 
 if not os.path.isdir(args.data_root):
     logging.error(f'folder {args.data_root} does not exist! Creating new folder')
-    os.makedirs(args.data_root)
+    os.makedirs(os.path.join(os.getcwd(),args.data_root))
 
 
 IMAGENET_API_WNID_TO_URLS = lambda wnid: f'http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={wnid}'
