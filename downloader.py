@@ -37,7 +37,7 @@ if not os.path.isdir(args.data_root):
     exit()
 
 
-IMAGENET_API_WNID_TO_URLS = lambda wnid: f'http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={wnid}'
+IMAGENET_API_WNID_TO_URLS = lambda wnid: f'http://www.image-net.org/api/imagenet.synset.geturls?wnid={wnid}'
 
 current_folder = os.path.dirname(os.path.realpath(__file__))
 
