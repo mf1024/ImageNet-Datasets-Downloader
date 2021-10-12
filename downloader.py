@@ -17,6 +17,7 @@ parser.add_argument('-scrape_only_flickr', default=True, type=lambda x: (str(x).
 parser.add_argument('-number_of_classes', default = 10, type=int)
 parser.add_argument('-images_per_class', default = 10, type=int)
 parser.add_argument('-data_root', default='' , type=str)
+parser.add_argument('-data_folder', default='imagenet_images' , type=str)
 parser.add_argument('-use_class_list', default=False,type=lambda x: (str(x).lower() == 'true'))
 parser.add_argument('-class_list', default=[], nargs='*')
 parser.add_argument('-debug', default=False,type=lambda x: (str(x).lower() == 'true'))
@@ -26,16 +27,15 @@ parser.add_argument('-multiprocessing_workers', default = 8, type=int)
 args, args_other = parser.parse_known_args()
 
 if args.debug:
-    logging.basicConfig(filename='imagenet_scarper.log', level=logging.DEBUG)
+    logging.basicConfig(filename='imagenet_scraper.log', level=logging.DEBUG)
 
 if len(args.data_root) == 0:
     logging.error("-data_root is required to run downloader!")
     exit()
 
 if not os.path.isdir(args.data_root):
-    logging.error(f'folder {args.data_root} does not exist! please provide existing folder in -data_root arg!')
-    exit()
-
+    os.makedirs(args.data_root)
+    logging.warning(f'folder {args.data_root} did not exist! creating folder..')
 
 IMAGENET_API_WNID_TO_URLS = lambda wnid: f'http://www.image-net.org/api/imagenet.synset.geturls?wnid={wnid}'
 
@@ -55,7 +55,7 @@ if args.use_class_list == True:
    for item in args.class_list:
        classes_to_scrape.append(item)
        if item not in class_info_dict:
-           logging.error(f'Class {item} not found in ImageNete')
+           logging.error(f'Class {item} not found in ImageNet')
            exit()
 
 elif args.use_class_list == False:
@@ -83,10 +83,11 @@ elif args.use_class_list == False:
 print("Picked the following clases:")
 print([ class_info_dict[class_wnid]['class_name'] for class_wnid in classes_to_scrape ])
 
-imagenet_images_folder = os.path.join(args.data_root, 'imagenet_images')
+imagenet_images_folder = os.path.join(args.data_root, args.data_folder)
 if not os.path.isdir(imagenet_images_folder):
     os.mkdir(imagenet_images_folder)
-
+else:
+    logging.warning(f'folder {args.data_folder} already exists! New images will be appended...')
 
 scraping_stats = dict(
     all=dict(
@@ -331,9 +332,10 @@ for class_wnid in classes_to_scrape:
 
     urls = [url.decode('utf-8') for url in resp.content.splitlines()]
 
-    #for url in  urls:
-    #    get_image(url)
-
-    print(f"Multiprocessing workers: {args.multiprocessing_workers}")
-    with Pool(processes=args.multiprocessing_workers) as p:
-        p.map(get_image,urls)
+    if args.multiprocessing_workers==0:
+        for url in  urls:
+            get_image(url)
+    else:
+        print(f"Multiprocessing workers: {args.multiprocessing_workers}")
+        with Pool(processes=args.multiprocessing_workers) as p:
+            p.map(get_image,urls)
